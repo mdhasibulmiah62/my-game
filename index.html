@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=
+    , initial-scale=1.0"
+    />
+    <title>Hasibul Hasan Munna</title>
+    <link rel="stylesheet" href="index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <!-- <i class="fa-brands fa-facebook"></i>
+    <i class="fa-solid fa-volleyball"></i>
+    <i class="fa-solid fa-person-swimming"></i> -->
+
+    <div class="container">
+      <div class="card">
+        <div class="card-titte">
+          <h5 class="hasib">Mohammad Hasibul Hasan Munna</h5>
+          <h6 class="hasib1">(Web Disigner)</h6>
+          <h1>Guessing Game</h1>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="form-fild">
+              <label for="gessingNumber">Plase! Guess a Number 1 to 5 :</label>
+              <input
+                type="number"
+                id="gessingNumber"
+                min="1"
+                max="5"
+                required
+              />
+            </div>
+            <div class="buttons">
+              <button id="Check" type="submit">Check Result</button>
+            </div>
+          </form>
+
+          <p style=" font-size: 14px; font-family: 'Montserrat', sans-serif;" class="resulttext"></p>
+          <p  class="remainingAttempt"></p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+
+let totalAttemp = 5;
+let attemp = 0;
+let totalWon = 0;
+let totalLost = 0;
+
+const form = document.querySelector("form");
+const cardBody = document.querySelector(".card-body");
+const gessingNumber = form.querySelector("#gessingNumber");
+const CheckButton = form.querySelector("#Check");
+const resulttext = cardBody.querySelector(".resulttext");
+const lostWonMassage = document.createElement("p");
+const remainingAttempt = cardBody.querySelector(".remainingAttempt");
+
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  attemp++;
+  if (attemp == 5) {
+    gessingNumber.disabled = true;
+    CheckButton.disabled = true;
+  }
+  if (attemp < 6) {
+    checkResult(gessingNumber.value);
+    remainingAttempt.innerHTML = `Remaining Attempt : ${totalAttemp - attemp}`;
+  }
+});
+
+function checkResult(gessingNumber) {
+  const randomNumber = getRandomNumber(5);
+  if (gessingNumber == randomNumber) {
+    resulttext.innerHTML = `Congrratulation! You win`;
+    totalWon++;
+  } else {
+    resulttext.innerHTML = `You have Lost: Random number was : ${randomNumber}`;
+    totalLost++;
+  }
+  lostWonMassage.innerHTML = `Win :${totalWon}   Lost :${totalLost}`;
+  lostWonMassage.classList.add("large");
+  cardBody.appendChild(lostWonMassage);
+}
+
+function getRandomNumber(limit) {
+  return Math.floor(Math.random() * limit) + 1;
+}
+
+
+
+    </script>
+  </body>
+</html>
